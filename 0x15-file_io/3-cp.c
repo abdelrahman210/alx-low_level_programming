@@ -27,7 +27,6 @@ void cp_file(char *file_from, char *file_to)
 	int ff = 0, ft = 0;
 	ssize_t wr, rd;
 	char buffer[1024];
-
 	ff = open(file_from, O_RDONLY);
 	if (!ff)
 	{
