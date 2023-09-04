@@ -4,7 +4,7 @@ void print_entry_address(char *ptr)
 	int i;
 	int begin;
 	char sys;
-	printf("  Entry point address:  0x");
+	printf("  Entry point address:               0x");
 	sys = ptr[4] + '0';
 	if (sys == '1')
 	{
@@ -40,7 +40,7 @@ void print_type(char *ptr)
 		type = ptr[16];
 	else
 		type = ptr[17];
-	printf("  Type:  ");
+	printf("  Type:                              ");
 	if (type == 0)
 		printf("NONE (No file type)\n");
 	else if (type == 1)
@@ -98,7 +98,7 @@ void check_sys(char *ptrmag)
 	char sys = ptrmag[4] + '0';
     	if (sys == '0')
         	exit(98);
-	printf("ELF Heazer:\n");
+	printf("ELF Header:\n");
 	print_magic(ptrmag);
 	if (sys == '1')
 		printf("  Class:                             ELF32\n");
