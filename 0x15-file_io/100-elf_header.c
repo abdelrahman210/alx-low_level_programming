@@ -91,7 +91,10 @@ void print_magic(char *ptr)
     printf("  Magic:  ");
     for (bytes = 0; bytes < 16; bytes++)
         printf(" %02x", ptr[bytes]);
-    printf("\n");
+	if (bytes == EI_NIDENT - 1)
+        printf("\n");
+	else
+	printf(" ");
 }
 void check_sys(char *ptrmag)
 {
@@ -112,10 +115,19 @@ void check_sys(char *ptrmag)
 }
 int check_elf(char *ptr)
 {
-	return (ptr[0] == ELFMAG0 &&
-			ptr[1] == ELFMAG1 &&
-			ptr[2] == ELFMAG2 &&
-			ptr[3] == ELFMAG3);
+	int index;
+	for (index = 0; index < 4; index++)
+	{
+		if (e_ident[index] != 127 &&
+		    e_ident[index] != 'E' &&
+		    e_ident[index] != 'L' &&
+		    e_ident[index] != 'F')
+		{
+			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+			exit(98);
+		}
+	}
+
 }
 int main(int argc, char *argv[])
 {
